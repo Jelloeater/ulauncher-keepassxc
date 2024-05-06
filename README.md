@@ -56,17 +56,12 @@ sudo apt-get install wmctrl
 
 ## Development
 
-I use the following tools while working on this extension:
-
-- [`Black`](https://github.com/psf/black) code formatter
-- `pytest`
-- `pylint` with the `flake8` plugin
-- `mypy` static type checker
 
 You can install them in one shot (except for `Black` - that's up to you) by running:
 
 ```shell
-pip install -r scripts/requirements.txt
+sudo apt install libgirepository1.0-dev gcc libcairo2-dev pkg-config python3-dev gir1.2-gtk-4.0
+poetry install
 ```
 
 Check PEP8 compliance, perform static type analysis and run unit tests:
