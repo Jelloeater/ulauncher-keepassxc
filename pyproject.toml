@@ -1,0 +1,108 @@
+[tool.poetry]
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.10"
+pycairo = "^1.26.0"
+pygobject = "^3.48.2"
+ulauncher = {git = "git@github.com:Ulauncher/Ulauncher.git", branch = "v5"}
+
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = "tests/"
+log_cli = true
+log_cli_level = "DEBUG"
+log_cli_format = "[%(asctime)s] [%(levelname)8s] --- %(message)s (%(filename)s:%(funcName)s():%(lineno)s)"
+log_cli_date_format = "%Y-%m-%d %H:%M:%S"
+
+[tool.coverage.run]
+omit = [
+    "tests/*",
+    ]
+
+[tool.mypy]
+ignore_missing_imports = true
+
+[tool.black]
+line-length = 88
+skip-string-normalization = true
+
+[tool.flake8]
+exclude =['./tests']
+max-line-length = 88
+count = false
+statistics = true
+diff = true
+format = "pylint"
+ignore = "E402"
+
+[tool.autoflake]
+check = true
+in-place = true
+expand-star-imports = false
+remove-unused-variables = true
+remove-duplicate-keys = true
+ignore-init-module-imports = false
+recursive = true
+
+[tool.isort]
+multi_line_output = 3
+include_trailing_comma = "True"
+force_grid_wrap = 0
+use_parentheses = "True"
+line_length = 88
+profile = "black"
+
+[tool.tartufo]
+repo-path = "."
+regex = true
+entropy = true
+exclude-path-patterns = [
+ {path-pattern = 'poetry\.lock'},
+ {path-pattern = 'pyproject\.toml'},
+ # To not have to escape `\` in regexes, use single quoted
+ # TOML 'literal strings'
+ {path-pattern = 'docs/source/(.*)\.rst'},
+]
+exclude-entropy-patterns = [
+    {path-pattern = '\.github/workflows/.*\.yml', pattern = 'uses: .*@[a-zA-Z0-9]{40}', reason = 'GitHub Actions'},
+    {path-pattern = 'poetry\.lock', pattern = '.'},
+    {path-pattern = 'Pipfile\.lock', pattern = '.'},
+    {path-pattern = 'README\.md', pattern = '.'},
+    {path-pattern = 'index\.rst', pattern = '.'},
+
+]
+
+[tool.poetry.group.dev.dependencies]
+setuptools = "*"
+pytest = "*"
+pytest-cov = "*"
+python-dotenv = "*"
+pytest-pycharm = "*"
+autoflake = "*"
+pre-commit = "*"
+vulture = "*"
+isort = "*"
+xenon = "*"
+black = "*"
+typing_extensions ="*"
+#typeguard ="*" # Typing
+mypy = "*" # Typing
+pdoc3 = "*"
+pylint = "*"
+bandit = "*"
+whispers = "*"
+mdformat-gfm ="*"
+mdformat-frontmatter ="*"
+flake8 = "*"
+Flake8-pyproject="*"
+tartufo="*"
+mdToRst = "*"

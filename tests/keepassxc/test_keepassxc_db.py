@@ -2,11 +2,12 @@ from time import sleep
 import pytest
 from keepassxc import keepassxc_db as kpdb
 
+TEST_FILE_PATH = "../data/test.kdbx"
 
 @pytest.fixture
 def test_db():
     db = kpdb.KeepassxcDatabase()
-    db.initialize("tests/data/test.kdbx", 0)
+    db.initialize(TEST_FILE_PATH, 0)
     return db
 
 
@@ -29,7 +30,7 @@ def test_db_not_found():
 def test_inactivity_lock():
     TIMEOUT = 1
     test_db = kpdb.KeepassxcDatabase()
-    test_db.initialize("tests/data/test.kdbx", TIMEOUT)
+    test_db.initialize(TEST_FILE_PATH, TIMEOUT)
     assert test_db.verify_and_set_passphrase("right passphrase")
     # dont need passphrase immediately after unlocking
     assert not test_db.is_passphrase_needed()
